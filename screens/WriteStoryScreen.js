@@ -13,19 +13,19 @@ export default class WriteStoryScreen extends React.Component{
             text2:''
         }
     }
-    submitAuthor = async (text)=>{
+    submitAuthor = ()=>{
        db.collection("Story").doc("Author").update({
-           "Author Name":text
+           'AuthorName':this.state.text
        })
     }
-    submitTitle = async (text1)=>{
+   submitTitle =  ()=>{
         db.collection("Story").doc("Title").update({
-            "Title":text1
+            'Title':this.state.text1
         })
     }
-    submitStory = async (text2)=>{
+    submitStory = ()=>{
         db.collection("Story").doc("Story").update({
-            "Story":text2
+            'Story':this.state.text2
         })
         
     }
@@ -36,25 +36,29 @@ export default class WriteStoryScreen extends React.Component{
                 
                 <TextInput style = {styles.inputBox}
                 placeholder={"Story Title"}
-                onChangeText={text1 => {
+                onChangeText={(text1) => {
                     this.setState({ text1: text1 });
-                  }}/>
+                    
+                  }}
+                  value = {this.state.text1}/>
                 <TextInput style = {styles.inputBox}
                 placeholder={"Author"}
-                onChangeText={text => {
+                onChangeText={(text) => {
                     this.setState({ text: text });
-                  }}/>
-                <TextInput style = {styles.inputBox} multiline={true}
+                  }}
+                  value = {this.state.text}/>
+                <TextInput style = {[styles.inputBox, {height: 400}]} multiline={true}
                 placeholder={"Write Story Here"}
-                onChangeText={text2 => {
+                onChangeText={(text2) => {
                     this.setState({ text2: text2 });
-                  }}/>
+                  }}
+                  value = {this.state.text2}/>
 
                 <TouchableOpacity style={styles.button}
-                onPress={async()=>{
-                 this.submitAuthor(this.state.text);
-                 this.submitTitle(this.state.text1);
-                 this.submitStory(this.state.text2);
+                onPress={()=>{
+                this.submitAuthor();
+                this.submitTitle();
+                 this.submitStory();
                 }}>
                     <Text style={styles.buttonText}>
                         Submit
@@ -75,6 +79,7 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         outline: 'none',
       },
+      
       button: {
         marginLeft: 50,
         marginTop: 50,

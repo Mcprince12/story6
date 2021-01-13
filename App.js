@@ -5,13 +5,15 @@ import {createBottomTabNavigator} from 'react-navigation-tabs'
 import WriteStoryScreen from './screens/WriteStoryScreen'
 import ReadStoryScreen from './screens/ReadStoryScreen'
 
-export default function App() {
+export default class App extends React.Component {
+  render(){
   return (
     <View style={styles.container}>
      <AppContainer/>
      
     </View>
   );
+  }
 }
 
 const styles = StyleSheet.create({
