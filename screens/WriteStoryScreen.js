@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import AppHeader from '../AppHeader';
 import db from '../config';
 import firebase from 'firebase';
@@ -31,7 +31,7 @@ export default class WriteStoryScreen extends React.Component{
     }
     render(){
         return(
-            <View>
+            <KeyboardAvoidingView>
                 <AppHeader/>
                 
                 <TextInput style = {styles.inputBox}
@@ -59,12 +59,13 @@ export default class WriteStoryScreen extends React.Component{
                 this.submitAuthor();
                 this.submitTitle();
                  this.submitStory();
+                 alert("Your Story has been Submitted");
                 }}>
                     <Text style={styles.buttonText}>
                         Submit
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
         height: 40,
         textAlign: 'center',
         borderWidth: 4,
-        outline: 'none',
       },
       
       button: {
