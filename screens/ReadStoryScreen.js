@@ -53,30 +53,31 @@ export default class ReadStoryScreen extends React.Component{
                     value={this.state.search}
                     style = {styles.searchBar}
                 />
-                <ScrollView>
-                <FlatList
-                    style = {styles.bar}
-                    data = {this.state.allInputs}
-                    renderItem={({item})=>{
+                <ScrollView style = {styles.bar}
+data = {this.state.allInputs}>
+                
+                    
+                    
+                   
                         <View style = {{borderBottomWidth:2}}>
                             <Text>
-                                {"Title "+item.text1}
+                                {db.collection("Story").doc("Author").get()+this.state.lastVisibleSubmission}
                             </Text>
                             <Text>
-                                {"AuthorName "+item.text}
+                                {db.collection("Story").doc("Title").get()+this.state.lastVisibleSubmission}
                             </Text>
                             <Text>
-                                {"Story "+item.text2}
+                                {db.collection("Story").doc("Story").get()+this.state.lastVisibleSubmission}
                             </Text>
 
                         </View>
-                    }}
-                    keyExtractor={(item, index)=>{
-                        index.toString()
-                    }}
-                    onEndReached={this.retrieveStory}
-                    onEndReachedThreshold={0.7}
-                />
+                   
+                   
+                   
+                   
+                    {this.retrieveStory}
+                    
+               
                 </ScrollView>
             </View>
         )
