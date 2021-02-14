@@ -21,7 +21,7 @@ export default class ReadStoryScreen extends React.Component{
    retrieveStory = async() =>{
         var text = this.state.search;
         var enteredText = text.split("");
-        if(enteredText[0].toUpperCase()==='A'){
+        if(enteredText[0].toUpperCase()===""){
             const query = await db.collection("Story").where('Story', '==', text)
             .startAfter(this.state.lastVisibleSubmission).limit(10).get();
             query.docs.map((doc)=>{
@@ -30,7 +30,7 @@ export default class ReadStoryScreen extends React.Component{
                     lastVisibleSubmission:doc,
                 })
             })
-        } else if(enteredText[0].toUpperCase()==='A'){
+        } else if(enteredText[0].toUpperCase()===""){
             const query = await db.collection("Author").where('AuthorName', '==', text)
             .startAfter(this.state.lastVisibleSubmission).limit(10).get();
             query.docs.map((doc)=>{
@@ -53,32 +53,32 @@ export default class ReadStoryScreen extends React.Component{
                     value={this.state.search}
                     style = {styles.searchBar}
                 />
-                <ScrollView style = {styles.bar}
-data = {this.state.allInputs}>
-                
-                    
-                    
-                   
-                        <View style = {{borderBottomWidth:2}}>
+                <FlatList style = {styles.bar}
+                        data = {this.state.allInputs}
+                    renderItem={( { item } ) => (
+                        <View style={{ borderBottomWidth: 2 }}>
                             <Text>
-                                {db.collection("Story").doc("Author").get()+this.state.lastVisibleSubmission}
+                                {db.collection( "Story" ).doc( "Author" ).get() + this.state.lastVisibleSubmission}
                             </Text>
                             <Text>
-                                {db.collection("Story").doc("Title").get()+this.state.lastVisibleSubmission}
+                                {db.collection( "Story" ).doc( "Title" ).get() + this.state.lastVisibleSubmission}
                             </Text>
                             <Text>
-                                {db.collection("Story").doc("Story").get()+this.state.lastVisibleSubmission}
+                                {db.collection( "Story" ).doc( "Story" ).get() + this.state.lastVisibleSubmission}
                             </Text>
 
                         </View>
+                    )}
                    
+                    keyExtractor={( item, index ) =>
+                    {
+                      index.toString()  
+                    }}
                    
-                   
-                   
-                    {this.retrieveStory}
-                    
+                    onEndReached={this.retrieveStory}
+                    onEndReachedThreshold={0.7}
                
-                </ScrollView>
+               />
             </View>
         )
     }
