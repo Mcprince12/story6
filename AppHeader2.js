@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-class AppHeader extends React.Component {
+class AppHeader2 extends React.Component {
   render() {
     return (
       <View style={styles.textContainer}>
@@ -13,7 +13,7 @@ class AppHeader extends React.Component {
 
 const styles = StyleSheet.create({
   textContainer: {
-    backgroundColor: 'magenta',
+    backgroundColor: 'teal',
   },
   text: {
     color: 'white',
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppHeader;
+export default AppHeader2;
